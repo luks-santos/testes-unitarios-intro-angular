@@ -26,4 +26,16 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, testes-unitarios-intro-angular');
   });
+
+  it(`testing function sum`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.sum(1, 2)).toEqual(3);
+  });
+
+  it(`testing function sum with value wrong`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.sum(1, 2)).not.toEqual(2); 
+  });
 });
