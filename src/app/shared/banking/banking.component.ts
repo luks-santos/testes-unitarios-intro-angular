@@ -11,6 +11,15 @@ export class BankingComponent {
   private poupanca: number = 10;
   private carteira: number = 50;
 
+  
+  get getPoupanca() {
+    return this.poupanca;
+  }
+
+  get getCarteira() { 
+    return this.carteira;
+  }
+  
   setSacar(value: string): number | undefined {
     const sacar = Number(value);
 
@@ -31,13 +40,5 @@ export class BankingComponent {
 
     this.carteira -= depositar;
     return (this.poupanca += depositar);
-  }
-
-  get getPoupanca() {
-    return this.poupanca;
-  }
-
-  get getCarteira() { 
-    return this.carteira;
   }
 }
