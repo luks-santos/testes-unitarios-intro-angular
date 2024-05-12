@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 import { BankingComponent } from './shared/banking/banking.component';
 
 @Component({

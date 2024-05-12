@@ -1,0 +1,8 @@
+<hr />
+<ul>
+  @for (investment of investments; track $index) {
+    <li class="list-items">
+      {{ investment.name }} | {{ investment.value}}
+    </li>
+  }
+</ul>

@@ -1,6 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ListComponent } from '../investments/components/list/list.component';
 import { BankingComponent } from './banking.component';
+
 
 describe('BankingComponent', () => {
   let component: BankingComponent;
@@ -8,7 +11,7 @@ describe('BankingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BankingComponent]
+      imports: [BankingComponent, ListComponent, HttpClientTestingModule] // ListComponent is imported because it is used in BankingComponent
     })
     .compileComponents();
     
@@ -21,6 +24,7 @@ describe('BankingComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // Testes Unitários
   it('(Unit) getPoupanca: should return 10', () => { 
     expect(component.getPoupanca).toEqual(10);
   });
@@ -53,5 +57,28 @@ describe('BankingComponent', () => {
     expect(component.setDepositar('60')).toBeUndefined();
     expect(component.getPoupanca).toEqual(10);
     expect(component.getCarteira).toEqual(50);
+  });
+
+  // Testes de Interface
+  it('(Interface) setDepositar: should transfer 10 from carteira to poupanca', () => { 
+    let el = fixture.debugElement.nativeElement;
+    el.querySelector('#input-depositar').value = '10';
+    el.querySelector('#depositar').click();
+    fixture.detectChanges();
+
+    expect(el.querySelector('#get-poupanca').textContent).toEqual('20');
+    expect(component.getPoupanca).toEqual(20);
+    expect(component.getCarteira).toEqual(40);
+  });
+
+  it('(Interface) setSacar: should transfer 10 from poupanca to carteira', () => { 
+    let el = fixture.debugElement.nativeElement;
+    el.querySelector('#input-sacar').value = '10';
+    el.querySelector('#sacar').click();
+    fixture.detectChanges();
+
+    expect(el.querySelector('#get-carteira').textContent).toEqual('60');
+    expect(component.getPoupanca).toEqual(0);
+    expect(component.getCarteira).toEqual(60);
   });
 });
